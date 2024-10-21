@@ -164,10 +164,17 @@ function(e, t, n) {
     var a = n(98),
         r = o(a),
         i = n(97),
-        s = o(i);
+        s = o(i),
+        t = n(96),
+        y = o(t)
+        u = n(95),
+        p = o(u);
+
     t.default = {
         DBCS: r.default,
-        IMS: s.default
+        IMS: s.default,
+        HRIS: y.default,
+        Internship: p.default
     }
 },
 function(e, t, n) {
