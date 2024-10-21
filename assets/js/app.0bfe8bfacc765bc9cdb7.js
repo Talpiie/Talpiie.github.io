@@ -1318,7 +1318,7 @@ function(e, t) {
             return n("header", {
                 staticClass: "section-header"
             }, [n("i", {
-                staticClass: "site-avatar"
+                staticClass: "site-avatar icn-erik"
             })])
         }]
     }
