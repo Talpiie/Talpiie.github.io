@@ -282,7 +282,7 @@ function(e, t) {
         },
         computed: {
             iconClass: function() {
-                return "icn-" + this.icon.trim()
+                return "" + this.icon.trim()
             }
         }
     }
