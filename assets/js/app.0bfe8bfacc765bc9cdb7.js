@@ -124,27 +124,27 @@ webpackJsonp([1, 0], [function(e, t, n) {
             name: "Facebook",
             url: "https://facebook.com/",
             profile: "RwshRwsh",
-            icon: "facebook"
+            icon: "/img/facebook-logo.png"
         }, {
             name: "Tiktok",
             url: "https://tiktok.com/",
             profile: "@Talpiie",
-            icon: "tiktok"
+            icon: "/img/facebook-logo.png"
         }, {
             name: "GitHub",
             url: "https://github.com/",
             profile: "Talpiie",
-            icon: "github"
+            icon: "/img/facebook-logo.png"
         }, {
             name: "Instagram",
             url: "https://Instagram.com/",
             profile: "talpiie",
-            icon: "instagram"
+            icon: "/img/facebook-logo.png"
         }, {
             name: "steam",
             url: "https://steamcommunity.com/id/",
             profile: "AjinGrey",
-            icon: "steam"
+            icon: "/img/facebook-logo.png"
         }]
     }
 }
