@@ -265,43 +265,53 @@ const MODE_NORMAL = 1, MODE_ENDLESS = 2, MODE_PRACTICE = 3;
     let _ttreg = / t{1,2}(\d+)/,
         _clearttClsReg = / t{1,2}\d+| bad/;
 
-    function refreshGameLayer(box, loop, offset) {
-        let i = Math.floor(Math.random() * 1000) % 4 + (loop ? 0 : 4);
-        for (let j = 0; j < box.children.length; j++) {
-            let r = box.children[j], rstyle = r.style;
-            rstyle.left = (j % 4) * blockSize + 'px';
-            rstyle.bottom = Math.floor(j / 4) * blockSize + 'px';
-            rstyle.width = blockSize + 'px';
-            rstyle.height = blockSize + 'px';
-            r.className = r.className.replace(_clearttClsReg, '');
-            if (i === j) {
-                _gameBBList.push({
-                    cell: i % 4,
-                    id: r.id
-                });
-                r.className += ' t' + (Math.floor(Math.random() * 1000) % 5 + 1);
-                r.notEmpty = true;
-                i = (Math.floor(j / 4) + 1) * 4 + Math.floor(Math.random() * 1000) % 4;
-            } else {
-                r.notEmpty = false;
-            }
-        }
-        if (loop) {
-            box.style.webkitTransitionDuration = '0ms';
-            box.style.display = 'none';
-            box.y = -blockSize * (Math.floor(box.children.length / 4) + (offset || 0)) * loop;
-            setTimeout(function () {
-                box.style[transform] = 'translate3D(0,' + box.y + 'px,0)';
-                setTimeout(function () {
-                    box.style.display = 'block';
-                }, 100);
-            }, 200);
+    let lastRandomIndex = -1; // Track the last random index globally or within the function scope
+
+function refreshGameLayer(box, loop, offset) {
+    let i;
+
+    do {
+        i = Math.floor(Math.random() * 1000) % 4 + (loop ? 0 : 4);
+    } while (i === lastRandomIndex); // Ensure the new value is different
+
+    lastRandomIndex = i; // Update the last random index
+
+    for (let j = 0; j < box.children.length; j++) {
+        let r = box.children[j], rstyle = r.style;
+        rstyle.left = (j % 4) * blockSize + 'px';
+        rstyle.bottom = Math.floor(j / 4) * blockSize + 'px';
+        rstyle.width = blockSize + 'px';
+        rstyle.height = blockSize + 'px';
+        r.className = r.className.replace(_clearttClsReg, '');
+        if (i === j) {
+            _gameBBList.push({
+                cell: i % 4,
+                id: r.id
+            });
+            r.className += ' t' + (Math.floor(Math.random() * 1000) % 5 + 1);
+            r.notEmpty = true;
+            i = (Math.floor(j / 4) + 1) * 4 + Math.floor(Math.random() * 1000) % 4;
         } else {
-            box.y = 0;
-            box.style[transform] = 'translate3D(0,' + box.y + 'px,0)';
+            r.notEmpty = false;
         }
-        box.style[transitionDuration] = '150ms';
     }
+    if (loop) {
+        box.style.webkitTransitionDuration = '0ms';
+        box.style.display = 'none';
+        box.y = -blockSize * (Math.floor(box.children.length / 4) + (offset || 0)) * loop;
+        setTimeout(function () {
+            box.style[transform] = 'translate3D(0,' + box.y + 'px,0)';
+            setTimeout(function () {
+                box.style.display = 'block';
+            }, 100);
+        }, 200);
+    } else {
+        box.y = 0;
+        box.style[transform] = 'translate3D(0,' + box.y + 'px,0)';
+    }
+    box.style[transitionDuration] = '150ms';
+}
+
 
     function gameLayerMoveNextRow() {
         for (let i = 0; i < GameLayer.length; i++) {
